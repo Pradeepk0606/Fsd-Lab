@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>React Counter</title>
+ <! -- React CDN -->
+ <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+ <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+ <! -- Babel CDN -->
+ <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+ <style>
+ body {
+ font-family: Arial, sans-serif;
+ text-align: center;
+ margin-top: 100px;
+ }
+ button {
+ padding: 10px 20px;
+ margin: 10px;
+ font-size: 16px;
+ }
+ </style>
+</head>
+<body>
+ <div id="root"></div>
+ <script type="text/babel">
+ function Counter ()
+{
+ const [count, setCount] = React.useState(0);
+ return (
+ <div>
+ <h1>Counter Application</h1>
+ <h2>Count: {count}</h2>
+ <button onClick={() => setCount(count + 1)}>
+ Increment
+ </button>
+ <button onClick={() => setCount(count - 1)}>
+ Decrement
+ </button>
+ </div>
+ );
+ }
+ const root = ReactDOM.createRoot(document.getElementById("root"));
+ root.render(<Counter />);
+ </script>
+</body>
+</html>

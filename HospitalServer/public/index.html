@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hospital Bill Details</title>
+<link rel="stylesheet" href="style.css">
+
+<script>
+function validateForm() {
+var name = document.getElementById("name").value.trim();
+var phone = document.getElementById("phone").value.trim();
+var type = document.getElementById("type").value;
+
+if (name === "" || phone === "" || type === "") {
+alert("All fields are required");
+return false;
+}
+
+if (!/^[0-9]+$/.test(phone)) {
+alert("Phone number must contain only digits");
+return false;
+}
+
+return true;
+}
+</script>
+</head>
+
+<body>
+<h1>Hospital Bill Details</h1>
+
+<form action="/bill" method="get" onsubmit="return validateForm()">
+
+<input type="text" id="name" name="name" placeholder="Patient Name">
+
+<input type="text" id="phone" name="phone" placeholder="Phone Number">
+
+<select id="type" name="type">
+<option value="">-- Select Patient Type --</option>
+<option value="In">In Patient</option>
+<option value="Out">Out Patient</option>
+</select>
+
+<button type="submit">Generate Bill</button>
+
+</form>
+</body>
+</html>

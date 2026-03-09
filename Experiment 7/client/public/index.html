@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Employee Details App</title>
+  <!-- React and Babel from CDN -->
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    function App() {
+      const [name, setName] = useState("");
+      const [empId, setEmpId] = useState("");
+      const [employees, setEmployees] = useState([]);
+
+      useEffect(() => {
+        fetch("http://localhost:5000/employees")
+          .then((res) => res.json())
+          .then((data) => setEmployees(data))
+          .catch((err) => console.log(err));
+      }, []);
+
+      const addEmployee = () => {
+        if (!name || !empId) return;
+        const newEmployee = { name, empId };
+        fetch("http://localhost:5000/employees", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(newEmployee),
+        }).then(() => {
+          setEmployees([...employees, newEmployee]);
+          setName("");
+          setEmpId("");
+        });
+      };
+
+      return (
+        <div style={{ textAlign: "center" }}>
+          <h2>Employee Details App</h2>
+          <input
+            placeholder="Enter Employee Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <br />
+          <br />
+          <input
+            placeholder="Enter Employee ID"
+            value={empId}
+            onChange={(e) => setEmpId(e.target.value)}
+          />
+          <br />
+          <br />
+          <button onClick={addEmployee}>Add Employee</button>
+          <h3>Employee List</h3>
+          <table border="1" style={{ margin: "auto" }}>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Employee ID</th>
+              </tr>
+            </thead>
+            <tbody>
+              {employees.map((employee, index) => (
+                <tr key={index}>
+                  <td>{employee.name}</td>
+                  <td>{employee.empId}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+    }
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>
