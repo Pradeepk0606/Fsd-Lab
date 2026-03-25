@@ -1,0 +1,10 @@
+body{margin:0;background:linear-gradient(to right,#e15656,#e39898,#333);color:#0e0303;font-family:Arial;}
+.navbar{display:flex;justify-content:space-between;align-items:center;padding:15px;background:#141414;}
+.logo{color:red;font-size:22px;}
+.row{display:flex;gap:15px;padding:20px;overflow-x:auto;}
+.card{min-width:150px;height:100px;background:#a9a4a4;border:2px solid
+rebeccapurple;display:flex;align-items:center;justify-content:center;border-radius:10px;}
+.auth{display:flex;flex-direction:column;width:300px;margin:100px auto;gap:10px;}
+.auth input,.auth button{padding:10px;}
+.auth button{background:red;color:white;border:none;}
+.auth h1,.auth h2{text-align:center;}
